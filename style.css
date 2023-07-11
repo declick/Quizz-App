@@ -148,3 +148,38 @@ body {
 .letter-container {
   display: flex;
 }
+
+.progress-indicator {
+  position: relative;
+  top: -114px;
+  right: 52px;
+}
+
+.category-indicator {
+  padding-top: 15px;
+
+}
+
+
+
+.lives-indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.lives-indicator-game {
+  position: relative;
+  top: -18px;
+  right: -56px;
+}
+
+.lives-icon {
+  font-size: 20px;
+  color: gold;
+}
+
+.lives-count {
+  font-size: 18px;
+  margin-left: 5px;
+}

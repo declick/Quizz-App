@@ -8,12 +8,11 @@ window.addEventListener('load', function() {
   var letterContainer = document.getElementById('letter-box-container');
   var checkButton = document.getElementById('check-button');
   var backButton = document.getElementById('back-button');
-  var selectedWord = getCurrentWord(); // Récupérer le mot en cours depuis le stockage local
   var selectedWord = '';
-  var shuffledWord = '';
   var categoryName = '';
   var attempts = 0; // Nombre de tentatives actuelles
   var maxAttempts = 3; // Nombre maximum de tentatives autorisées
+  var lives = 3;
   var isGameOver = false; // Indicateur de fin de partie
 
   menu.style.display = 'none'; // Masquer le menu au chargement de la page
@@ -36,18 +35,31 @@ window.addEventListener('load', function() {
     });
   }
 
+  function shuffleWord(word) {
+    var shuffledWord = word.split('');
+
+    for (var i = shuffledWord.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = shuffledWord[i];
+      shuffledWord[i] = shuffledWord[j];
+      shuffledWord[j] = temp;
+    }
+
+    return shuffledWord.join('');
+  }
+
   var selectedCategory; // Déclarer selectedCategory en dehors de la fonction startGame()
 
+  var wordsByCategory = {
+    'Niveau 1 - Mots de 3 lettres': ['cha', 'lit', 'rat', 'pom', 'arc', 'kwa', 'kyu', 'wax', 'wok', 'yak'],
+    'Niveau 2 - Mots de 4 lettres': ['casa', 'pied', 'lune', 'sole', 'fils', 'gars', 'gale', 'gags', 'gant', 'gala'],
+    'Niveau 3 - Mots de 5 lettres': ['tapis', 'route', 'table', 'maison', 'avion', 'sable'],
+    'Niveau 4 - Mots de 6 lettres': ['voyage', 'animal', 'espace', 'orange', 'école'],
+    'Niveau 5 - Mots de 7 lettres': ['ordinateur', 'tortue', 'chambre', 'banane', 'bouteil', 'chapeau']
+  };
   function startGame(categoryName) {
     console.log('Démarrage du jeu dans la catégorie ' + categoryName);
 
-    var wordsByCategory = {
-      'Niveau 1 - Mots de 3 lettres': ['chat', 'lit', 'rat', 'pom', 'arc'],
-      'Niveau 2 - Mots de 4 lettres': ['casa', 'pied', 'lune', 'sole', 'fils', 'gars'],
-      'Niveau 3 - Mots de 5 lettres': ['tapis', 'route', 'table', 'maison', 'avion', 'sable'],
-      'Niveau 4 - Mots de 6 lettres': ['voyage', 'animal', 'espace', 'orange', 'école'],
-      'Niveau 5 - Mots de 7 lettres': ['ordinateur', 'tortue', 'chambre', 'banane', 'bouteil', 'chapeau']
-    };
 
     selectedCategory = wordsByCategory[categoryName];
 
@@ -56,8 +68,7 @@ window.addEventListener('load', function() {
       return;
     }
 
-    selectedWord = selectedCategory[Math.floor(Math.random() * selectedCategory.length)];
-    selectedCategory = selectedCategory.filter(word => word !== selectedWord);
+    selectedWord = selectedCategory[getProgress(categoryName)];
     shuffledWord = shuffleWord(selectedWord);
     displayShuffledWord();
 
@@ -94,14 +105,19 @@ window.addEventListener('load', function() {
       console.log('Bravo ! Tu as reconstitué le mot ' + selectedWord + ' !');
       resetLetters();
 
-      if (selectedCategory.length === 0) {
+      // Mettre à jour la progression
+      var progress = getProgress(categoryName) + 1;
+      saveProgress(categoryName, progress);
+      updateCategoryProgress(); // Mettre à jour l'indicateur de progression
+
+
+      if (progress === selectedCategory.length) {
         console.log('Félicitations ! Tu as terminé la catégorie ' + categoryName + ' !');
         resetGame();
         return;
       }
 
-      selectedWord = selectedCategory[Math.floor(Math.random() * selectedCategory.length)];
-      selectedCategory = selectedCategory.filter(word => word !== selectedWord);
+      selectedWord = selectedCategory[progress];
       shuffledWord = shuffleWord(selectedWord);
       displayShuffledWord();
     } else {
@@ -113,10 +129,18 @@ window.addEventListener('load', function() {
         isGameOver = true;
         resetGame();
       } else {
+        // Décrémentez le nombre de vies
+        lives--;
+        updateLivesIndicator(); // Mettez à jour l'indicateur de vies
+
         resetLetters();
         displayShuffledWord();
       }
     }
+  }
+  function updateLivesIndicator() {
+    var livesCountElement = document.getElementById('lives-count');
+    livesCountElement.textContent = lives.toString();
   }
 
   function displayShuffledWord() {
@@ -125,6 +149,18 @@ window.addEventListener('load', function() {
     while (wordContainer.firstChild) {
       wordContainer.removeChild(wordContainer.firstChild);
     }
+    // Récupérer les indicateurs de progression pour la catégorie en cours
+    var categoryProgress = getProgress(categoryName);
+    var totalWords = selectedCategory.length;
+    var progressText = (categoryProgress + 0) + '/' + totalWords;
+
+    // Créer un élément d'indicateur de progression
+    var progressIndicator = document.createElement('div');
+    progressIndicator.classList.add('progress-indicator');
+    progressIndicator.textContent = progressText;
+
+    // Ajouter l'indicateur de progression à la zone de jeu
+    gameContainer.insertBefore(progressIndicator, wordContainer);
 
     for (var i = 0; i < emptyBoxes.length; i++) {
       var emptyBox = document.createElement('div');
@@ -156,41 +192,8 @@ window.addEventListener('load', function() {
     }
   }
 
-  function shuffleWord(word) {
-    var shuffledWord = word.split('');
-
-    for (var i = shuffledWord.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = shuffledWord[i];
-      shuffledWord[i] = shuffledWord[j];
-      shuffledWord[j] = temp;
-    }
-
-    return shuffledWord.join('');
-  }
-
-  function handleBackClick() {
-    gameContainer.style.display = 'none';
-    menu.style.display = 'block';
-    resetGame();
-  }
-
- function displayNextWord() {
-    // Sélectionner un mot aléatoire dans la catégorie
-    selectedWord = selectedCategory[Math.floor(Math.random() * selectedCategory.length)];
-    shuffledWord = shuffleWord(selectedWord);
-    displayShuffledWord();
-    setupLetterClickHandlers();
-    attempts = 0; // Réinitialiser le nombre de tentatives
-    isGameOver = false; // Réinitialiser l'indicateur de fin de partie
-
-    // Sauvegarder le mot en cours dans le stockage local
-    saveCurrentWord(selectedWord);
-  }
-
   function resetGame() {
-    // Effacer le mot en cours du stockage local
-    clearCurrentWord();
+    clearProgress();
     selectedCategory = [];
     selectedWord = '';
     shuffledWord = '';
@@ -198,8 +201,72 @@ window.addEventListener('load', function() {
     attempts = 0;
     isGameOver = false;
     resetLetters();
+    gameContainer.style.display = 'none';
+    menu.style.display = 'block';
+    updateCategoryProgress();
   }
 
+  function updateCategoryProgress() {
+    var categories = document.getElementsByClassName('category');
+    for (var i = 0; i < categories.length; i++) {
+      var category = categories[i];
+      var categoryName = category.getElementsByClassName('category-text')[0].textContent;
+      var categoryIndicators = document.querySelectorAll('.category-indicator[data-category="' + categoryName + '"]');
+      for (var j = 0; j < categoryIndicators.length; j++) {
+        var categoryIndicator = categoryIndicators[j];
+        var progress = getProgress(categoryName);
+        var totalWords = wordsByCategory[categoryName].length;
+        var progressText = (progress + 0) + '/' + totalWords;
+        categoryIndicator.textContent = progressText;
+      }
+    }
+  }
+
+  function displayShuffledWord() {
+    var emptyBoxes = selectedWord.split('');
+
+    while (wordContainer.firstChild) {
+      wordContainer.removeChild(wordContainer.firstChild);
+    }
+    // Récupérer les indicateurs de progression pour la catégorie en cours
+    var categoryProgress = getProgress(categoryName);
+    var totalWords = selectedCategory.length;
+    var progressText = (categoryProgress + 0) + '/' + totalWords;
+
+    // Créer un élément d'indicateur de progression
+    var progressIndicator = document.createElement('div');
+    progressIndicator.classList.add('progress-indicator');
+    progressIndicator.textContent = progressText;
+
+    // Ajouter l'indicateur de progression à la zone de lettres
+    letterContainer.appendChild(progressIndicator);
+
+    for (var i = 0; i < emptyBoxes.length; i++) {
+      var emptyBox = document.createElement('div');
+      emptyBox.classList.add('empty-box');
+      wordContainer.appendChild(emptyBox);
+    }
+
+    var letters = shuffledWord.split('');
+    for (var i = 0; i < letters.length; i++) {
+      var letterBox = document.createElement('div');
+      letterBox.classList.add('letter');
+      letterBox.textContent = letters[i];
+      letterBox.addEventListener('click', handleLetterClick);
+      letterContainer.appendChild(letterBox);
+    }
+
+    updateCategoryProgress(); // Mettre à jour les indicateurs de progression en jeu
+  }
+
+  // Mettre à jour les indicateurs de catégorie lors du chargement initial
+  updateCategoryProgress();
+  updateLivesIndicator();
+
   checkButton.addEventListener('click', handleCheckClick);
-  backButton.addEventListener('click', handleBackClick);
+  backButton.addEventListener('click', function() {
+    gameContainer.style.display = 'none';
+    menu.style.display = 'block';
+    resetGame();
+  });
 });

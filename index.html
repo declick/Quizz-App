@@ -12,8 +12,8 @@
   <div id="loading" class="container">
     <div class="logo">
       <img class="logo" src="./assets/img/menu.jpg" alt="logo">
-        <div class="title">
-        </div>
+      <div class="title">
+      </div>
 
       <audio src="./assets/sound/ready.mp3" type="audio/mp3" autoplay></audio>
 
@@ -26,29 +26,43 @@
 
       <img class="logo" src="./assets/img/menu.jpg" alt="logo">
     </div>
+
+
     <div class="category" id="category1">
       <div class="category-text">Niveau 1 - Mots de 3 lettres</div>
+      <div class="category-indicator" data-category="Niveau 1 - Mots de 3 lettres"></div>
       <button class="play-button">Jouer</button>
     </div>
+
     <div class="category" id="category2">
       <div class="category-text">Niveau 2 - Mots de 4 lettres</div>
+      <div class="category-indicator" data-category="Niveau 2 - Mots de 4 lettres"></div>
       <button class="play-button">Jouer</button>
     </div>
     <div class="category" id="category3">
       <div class="category-text">Niveau 3 - Mots de 5 lettres</div>
+      <div class="category-indicator" data-category="Niveau 3 - Mots de 5 lettres"></div>
       <button class="play-button">Jouer</button>
     </div>
     <div class="category" id="category4">
       <div class="category-text">Niveau 4 - Mots de 6 lettres</div>
+      <div class="category-indicator" data-category="Niveau 4 - Mots de 6 lettres"></div>
       <button class="play-button">Jouer</button>
     </div>
     <div class="category" id="category5">
       <div class="category-text">Niveau 5 - Mots de 7 lettres</div>
+      <div class="category-indicator" data-category="Niveau 5 - Mots de 7 lettres"></div>
       <button class="play-button">Jouer</button>
     </div>
   </div>
 
   <div id="game-container" style="display: none;">
+
+    <div id="lives-indicator" class="lives-indicator">
+      <span class="lives-icon">★</span>
+      <span id="lives-count" class="lives-count">3</span>
+    </div>
+
     <div class="word-container">
       <div id="empty-box-container"></div>
     </div>
@@ -59,9 +73,9 @@
     <button id="back-button">Retour au menu</button>
   </div>
 
-
-  <script src="script.js"></script>
   <script src="storage.js"></script>
+  <script src="script.js"></script>
+
 </body>
 
 </html>

@@ -1,14 +1,17 @@
-// Fonction pour sauvegarder le mot en cours dans le stockage local
-function saveCurrentWord(selectedWord) {
-  localStorage.setItem('currentWord', selectedWord);
+// Fonction pour sauvegarder la progression dans le stockage local
+function saveProgress(categoryName, progress) {
+  var gameProgress = JSON.parse(localStorage.getItem('gameProgress')) || {};
+  gameProgress[categoryName] = progress;
+  localStorage.setItem('gameProgress', JSON.stringify(gameProgress));
 }
 
-// Fonction pour récupérer le mot en cours depuis le stockage local
-function getCurrentWord() {
-  return localStorage.getItem('currentWord') || '';
+// Fonction pour récupérer la progression depuis le stockage local
+function getProgress(categoryName) {
+  var gameProgress = JSON.parse(localStorage.getItem('gameProgress')) || {};
+  return gameProgress[categoryName] || 0;
 }
 
-// Fonction pour effacer le mot en cours du stockage local
-function clearCurrentWord() {
-  localStorage.removeItem('currentWord');
+// Fonction pour effacer la progression du stockage local
+function clearProgress() {
+  localStorage.removeItem('gameProgress');
 }
