@@ -11,7 +11,6 @@ window.addEventListener('load', function() {
   let categoryName = '';
   let attempts = 0; // Nombre de tentatives actuelles
   let maxAttempts = 3; // Nombre maximum de tentatives autorisées
-  let lives = 3;
   let isGameOver = false; // Indicateur de fin de partie
 
   menu.style.display = 'none'; // Masquer le menu au chargement de la page
@@ -21,6 +20,9 @@ window.addEventListener('load', function() {
     menu.style.display = 'block';
   }, 1500);
 
+  let lives = restoreLives(); // Restaurer le nombre de vies sauvegardé
+
+  
   for (let i = 0; i < categories.length; i++) {
     let category = categories[i];
     let playButton = category.getElementsByClassName('play-button')[0];
@@ -99,7 +101,7 @@ window.addEventListener('load', function() {
 
   function handleCheckClick() {
     if (isGameOver || lives === 0) {
-      return; // Ne pas exécuter le code restant si la partie est terminée ou le nombre de vies est zéro
+      return;
     }
 
     let emptyBoxes = document.getElementsByClassName('empty-box');
@@ -132,9 +134,12 @@ window.addEventListener('load', function() {
       console.log('Dommage ! Ce n\'est pas le bon mot.');
       attempts++;
 
-      // Décrémenter le nombre de vies
-      lives--;
-      updateLivesIndicator(); // Mettre à jour l'indicateur de vies
+      if (lives > 0) {
+        lives--;
+        saveLives(lives); // Sauvegarder le nombre de vies
+      }
+
+      updateLivesIndicator();
 
       if (lives === 0) {
         console.log('Nombre maximal de vies atteint. La partie est terminée.');
@@ -212,12 +217,11 @@ window.addEventListener('load', function() {
     selectedWord = '';
     shuffledWord = '';
     categoryName = '';
-    saveLives(lives); // Sauvegarder le nombre de vies
     resetLetters();
     gameContainer.style.display = 'none';
     menu.style.display = 'block';
     updateCategoryProgress();
-    updateLivesIndicator(); // Ajoutez cette ligne pour mettre à jour l'indicateur de vies
+    updateLivesIndicator();
   }
 
   function resetProgress() {
@@ -243,7 +247,6 @@ window.addEventListener('load', function() {
 
   // Mettre à jour les indicateurs de catégorie lors du chargement initial
   updateCategoryProgress();
-  lives = restoreLives(); // Restaurer le nombre de vies sauvegardé
   updateLivesIndicator(); // Mettre à jour l'indicateur de vies
 
   checkButton.addEventListener('click', handleCheckClick);
