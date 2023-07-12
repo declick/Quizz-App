@@ -22,7 +22,7 @@ window.addEventListener('load', function() {
 
   let lives = restoreLives(); // Restaurer le nombre de vies sauvegardé
 
-  
+
   for (let i = 0; i < categories.length; i++) {
     let category = categories[i];
     let playButton = category.getElementsByClassName('play-button')[0];
@@ -254,5 +254,6 @@ window.addEventListener('load', function() {
     gameContainer.style.display = 'none';
     menu.style.display = 'block';
     resetGame();
+
   });
 });

@@ -15,5 +15,11 @@ function saveLives(lives) {
 }
 
 function restoreLives() {
-  return parseInt(localStorage.getItem('lives')) || 3;
+  let storedLives = localStorage.getItem('lives');
+
+  if (storedLives !== null) {
+    return parseInt(storedLives);
+  }
+
+  return 3;
 }
