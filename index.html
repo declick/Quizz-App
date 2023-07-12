@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Votre jeu rétro</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
@@ -25,6 +25,11 @@
     <div class="logo">
 
       <img class="logo" src="./assets/img/menu.jpg" alt="logo">
+    </div>
+
+    <div id="" class="lives-indicator">
+      <span class="lives-icon">★</span>
+      <span id="lives-count" class="lives-count">3</span>
     </div>
 
 
@@ -58,9 +63,9 @@
 
   <div id="game-container" style="display: none;">
 
-    <div id="lives-indicator" class="lives-indicator">
+    <div id="" class="lives-indicator-game">
       <span class="lives-icon">★</span>
-      <span id="lives-count" class="lives-count">3</span>
+      <span id="lives-count-game" class="lives-count-game">3</span>
     </div>
 
     <div class="word-container">
@@ -73,8 +78,8 @@
     <button id="back-button">Retour au menu</button>
   </div>
 
-  <script src="storage.js"></script>
-  <script src="script.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/script.js"></script>
 
 </body>
 
