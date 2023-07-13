@@ -13,6 +13,11 @@ window.addEventListener('load', function() {
   let maxAttempts = 3; // Nombre maximum de tentatives autorisées
   let isGameOver = false; // Indicateur de fin de partie
 
+  let score = getScore(); // Récupérer le score sauvegardé
+  let scoreElement = document.getElementById('score');
+  scoreElement.textContent = score.toString();
+
+
   menu.style.display = 'none'; // Masquer le menu au chargement de la page
 
   setTimeout(function() {
@@ -81,11 +86,12 @@ window.addEventListener('load', function() {
 
   function handleLetterClick() {
     if (isGameOver || lives === 0) {
-      return; // Ne pas exécuter le code restant si la partie est terminée ou le nombre de vies est zéro
+      return;
     }
 
     let selectedLetter = this.textContent;
     let emptyBoxes = document.getElementsByClassName('empty-box');
+    let filledLetters = document.getElementsByClassName('filled-letter'); // Ajouter cette ligne
 
     for (let i = 0; i < emptyBoxes.length; i++) {
       let emptyBox = emptyBoxes[i];
@@ -94,10 +100,17 @@ window.addEventListener('load', function() {
         emptyBox.textContent = selectedLetter;
         emptyBox.classList.add('filled');
         this.style.visibility = 'hidden';
+        this.classList.remove('letter-box-bottom');
         break;
       }
     }
+
+    for (let i = 0; i < filledLetters.length; i++) { // Ajouter cette boucle
+      let filledLetter = filledLetters[i];
+      filledLetter.addEventListener('click', handleFilledLetterClick); // Ajouter un gestionnaire de clic pour les lettres remplies
+    }
   }
+
 
   function handleCheckClick() {
     if (isGameOver || lives === 0) {
@@ -120,6 +133,11 @@ window.addEventListener('load', function() {
       let progress = getProgress(categoryName) + 1;
       saveProgress(categoryName, progress);
       updateCategoryProgress();
+
+      // Augmenter le score
+      score++;
+      scoreElement.textContent = score.toString();
+      saveScore(score); // Sauvegarder le score
 
       if (progress === selectedCategory.length) {
         console.log('Félicitations ! Tu as terminé la catégorie ' + categoryName + ' !');
@@ -175,7 +193,7 @@ window.addEventListener('load', function() {
     // Créer un élément d'indicateur de progression
     let progressIndicator = document.createElement('div');
     progressIndicator.classList.add('progress-indicator');
-    progressIndicator.textContent = progressText;
+    progressIndicator.textContent = 'Niveaux:' + progressText;
 
     // Ajouter l'indicateur de progression à la zone de lettres
     letterContainer.appendChild(progressIndicator);
@@ -239,7 +257,7 @@ window.addEventListener('load', function() {
         let categoryIndicator = categoryIndicators[j];
         let progress = getProgress(categoryName);
         let totalWords = wordsByCategory[categoryName].length;
-        let progressText = (progress + 0) + '/' + totalWords;
+        let progressText = 'Niveaux: ' + (progress + 0) + '/' + totalWords;
         categoryIndicator.textContent = progressText;
       }
     }

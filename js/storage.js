@@ -23,3 +23,11 @@ function restoreLives() {
 
   return 3;
 }
+function saveScore(score) {
+  localStorage.setItem('score', score.toString());
+}
+
+function getScore() {
+  let storedScore = localStorage.getItem('score');
+  return storedScore ? parseInt(storedScore) : 0;
+}

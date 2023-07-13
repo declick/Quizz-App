@@ -78,6 +78,8 @@ body {
   border-radius: 5px;
   padding: 10px;
   cursor: pointer;
+
+  margin-bottom: 40px;
 }
 
 .word-container {
@@ -92,9 +94,9 @@ body {
   font-size: 24px;
   margin: 5px;
   width: 25px;
-  /* DÃ©finir la largeur souhaitÃ©e pour les cases vides */
+  /* Définir la largeur souhaitée pour les cases vides */
   height: 25px;
-  /* DÃ©finir la hauteur souhaitÃ©e pour les cases vides */
+  /* Définir la hauteur souhaitée pour les cases vides */
   background-color: #777777;
   border-radius: 5px;
   padding: 10px;
@@ -159,9 +161,10 @@ body {
 
 .progress-indicator {
   position: relative;
-  top: -114px;
-  right: 52px;
+  top: -174px;
+  left: 80px;
 }
+
 
 .category-indicator {
   padding-top: 15px;
@@ -170,19 +173,18 @@ body {
 
 .lives-indicator {
   position: absolute;
-  top: 6px;
-  right: 6px;
+  top: 30px;
 }
 
 .lives-indicator-game {
   position: relative;
-  top: -18px;
-  right: -56px;
+  top: -74px;
+  right: 149px;
 }
 
 .lives-icon {
   font-size: 20px;
-  color: gold;
+  color: #e91c1c;
 }
 
 .lives-count {
@@ -193,4 +195,9 @@ body {
 .lives-count-game {
   font-size: 18px;
   margin-left: 5px;
+}
+
+.score-container {
+  position: absolute;
+  top: 5px;
 }
