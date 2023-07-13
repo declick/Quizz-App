@@ -58,9 +58,6 @@ body {
   background-image: url(../assets/img/brique.jpg);
   background-position: center;
   padding: 45px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .letter-container {
@@ -94,9 +91,9 @@ body {
   font-size: 24px;
   margin: 5px;
   width: 25px;
-  /* Définir la largeur souhaitée pour les cases vides */
+  /* DÃ©finir la largeur souhaitÃ©e pour les cases vides */
   height: 25px;
-  /* Définir la hauteur souhaitée pour les cases vides */
+  /* DÃ©finir la hauteur souhaitÃ©e pour les cases vides */
   background-color: #777777;
   border-radius: 5px;
   padding: 10px;
@@ -160,9 +157,9 @@ body {
 }
 
 .progress-indicator {
+  left: -80px;
   position: relative;
-  top: -174px;
-  left: 80px;
+  top: -236px;
 }
 
 
@@ -173,13 +170,13 @@ body {
 
 .lives-indicator {
   position: absolute;
-  top: 30px;
+  top: 36px;
 }
 
 .lives-indicator-game {
   position: relative;
-  top: -74px;
-  right: 149px;
+  top: -78px;
+  left: -148px;
 }
 
 .lives-icon {
@@ -200,4 +197,25 @@ body {
 .score-container {
   position: absolute;
   top: 5px;
+}
+
+#score-label {
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.bonus-indicator {
+  position: absolute;
+  top: 66px;
+}
+
+.bonus-icon {
+  font-size: 20px;
+  color: #fff308;
+}
+
+.bonus-indicator-game {
+  position: relative;
+  top: -106px;
+  right: -145px;
 }

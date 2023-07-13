@@ -1,6 +1,4 @@
-window.addEventListener('load', function() {
-  let loading = document.getElementById('loading');
-  let menu = document.getElementById('menu');
+window.addEventListener('load', () => {
   let gameContainer = document.getElementById('game-container');
   let categories = document.getElementsByClassName('category');
   let wordContainer = document.getElementById('empty-box-container');
@@ -17,16 +15,7 @@ window.addEventListener('load', function() {
   let scoreElement = document.getElementById('score');
   scoreElement.textContent = score.toString();
 
-
-  menu.style.display = 'none'; // Masquer le menu au chargement de la page
-
-  setTimeout(function() {
-    loading.style.display = 'none';
-    menu.style.display = 'block';
-  }, 1500);
-
   let lives = restoreLives(); // Restaurer le nombre de vies sauvegardé
-
 
   for (let i = 0; i < categories.length; i++) {
     let category = categories[i];
@@ -41,7 +30,7 @@ window.addEventListener('load', function() {
     });
   }
 
-  function shuffleWord(word) {
+  const shuffleWord = (word) => {
     let shuffledWord = word.split('');
 
     for (let i = shuffledWord.length - 1; i > 0; i--) {
@@ -64,7 +53,7 @@ window.addEventListener('load', function() {
     'Niveau 5 - Mots de 7 lettres': ['ordinateur', 'tortue', 'chambre', 'banane', 'bouteil', 'chapeau']
   };
 
-  function startGame(categoryName) {
+  const startGame = (categoryName) => {
     console.log('Démarrage du jeu dans la catégorie ' + categoryName);
     selectedCategory = wordsByCategory[categoryName];
 
@@ -170,7 +159,7 @@ window.addEventListener('load', function() {
     }
   }
 
-  function updateLivesIndicator() {
+  const updateLivesIndicator = () => {
     let livesCountElement = document.getElementById('lives-count');
     let livesCountElementGame = document.getElementById('lives-count-game');
 
@@ -178,7 +167,7 @@ window.addEventListener('load', function() {
     livesCountElement.textContent = lives.toString();
   }
 
-  function displayShuffledWord() {
+  const displayShuffledWord = () => {
     let emptyBoxes = selectedWord.split('');
 
     while (wordContainer.firstChild) {
@@ -216,7 +205,7 @@ window.addEventListener('load', function() {
     updateCategoryProgress(); // Mettre à jour les indicateurs de progression en jeu
   }
 
-  function resetLetters() {
+  const resetLetters = () => {
     let emptyBoxes = document.getElementsByClassName('empty-box');
     let letterBoxes = document.getElementsByClassName('letter');
 
@@ -230,7 +219,7 @@ window.addEventListener('load', function() {
     }
   }
 
-  function resetGame() {
+  const resetGame = () => {
     selectedCategory = [];
     selectedWord = '';
     shuffledWord = '';
@@ -243,11 +232,10 @@ window.addEventListener('load', function() {
   }
 
   function resetProgress() {
-    // Supprimez la ligne clearProgress();
     updateCategoryProgress();
   }
 
-  function updateCategoryProgress() {
+  const updateCategoryProgress = () => {
     let categories = document.getElementsByClassName('category');
     for (let i = 0; i < categories.length; i++) {
       let category = categories[i];

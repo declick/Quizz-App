@@ -1,20 +1,20 @@
-function saveProgress(categoryName, progress) {
+const saveProgress = (categoryName, progress) => {
   localStorage.setItem(categoryName, progress);
-}
+};
 
-function getProgress(categoryName) {
+const getProgress = (categoryName) => {
   return parseInt(localStorage.getItem(categoryName)) || 0;
-}
+};
 
-function clearProgress() {
+const clearProgress = () => {
   localStorage.clear();
-}
+};
 
-function saveLives(lives) {
+const saveLives = (lives) => {
   localStorage.setItem('lives', lives.toString());
-}
+};
 
-function restoreLives() {
+const restoreLives = () => {
   let storedLives = localStorage.getItem('lives');
 
   if (storedLives !== null) {
@@ -22,12 +22,13 @@ function restoreLives() {
   }
 
   return 3;
-}
-function saveScore(score) {
-  localStorage.setItem('score', score.toString());
-}
+};
 
-function getScore() {
+const saveScore = (score) => {
+  localStorage.setItem('score', score.toString());
+};
+
+const getScore = () => {
   let storedScore = localStorage.getItem('score');
   return storedScore ? parseInt(storedScore) : 0;
-}
+};

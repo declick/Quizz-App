@@ -22,20 +22,31 @@
   </div>
 
   <div id="menu" class="container" style="display: none;">
-    <div class="logo">
 
+    <div class="logo">
       <img class="logo" src="./assets/img/menu.jpg" alt="logo">
     </div>
 
+    <div id="score-container" class="score-container">
+      <span id="score-label">score:</span>
+      <span id="score">0</span>
+    </div>
+
     <div id="" class="lives-indicator">
-      <span class="lives-icon">★</span>
+      <span class="lives-icon">❤</span>
       <span id="lives-count" class="lives-count">3</span>
+    </div>
+
+    <div id="" class="bonus-indicator">
+      <span class="bonus-icon">★</span>
+      <span id="bonus-count" class="bonus-count">10</span>
     </div>
 
 
     <div class="category" id="category1">
       <div class="category-text">Niveau 1 - Mots de 3 lettres</div>
-      <div class="category-indicator" data-category="Niveau 1 - Mots de 3 lettres"></div>
+      <div class="category-indicator" data-category="Niveau 1 - Mots de 3 lettres">
+      </div>
       <button class="play-button">Jouer</button>
     </div>
 
@@ -64,9 +75,15 @@
   <div id="game-container" style="display: none;">
 
     <div id="" class="lives-indicator-game">
-      <span class="lives-icon">★</span>
+      <span class="lives-icon">❤</span>
       <span id="lives-count-game" class="lives-count-game">3</span>
     </div>
+
+    <div id="" class="bonus-indicator-game">
+      <span class="bonus-icon">★</span>
+      <span id="bonus-count-game" class="bonus-count-game">10</span>
+    </div>
+
 
     <div class="word-container">
       <div id="empty-box-container"></div>
@@ -79,6 +96,7 @@
   </div>
 
   <script src="./js/storage.js"></script>
+<script src="./js/loading.js"></script>
   <script src="./js/script.js"></script>
 
 </body>
