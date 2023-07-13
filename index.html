@@ -4,8 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Votre jeu rétro</title>
   <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 </head>
 
 <body>
@@ -27,6 +30,7 @@
       <img class="logo" src="./assets/img/menu.jpg" alt="logo">
     </div>
 
+
     <div id="score-container" class="score-container">
       <span id="score-label">score:</span>
       <span id="score">0</span>
@@ -40,6 +44,29 @@
     <div id="" class="bonus-indicator">
       <span class="bonus-icon">★</span>
       <span id="bonus-count" class="bonus-count">10</span>
+    </div>
+
+    <div id="" class="lives-menu">
+
+      <i id="menu-icon" class="fas fa-bars">
+        <div class="menu-title">MENU</div>
+      </i>
+
+      <div id="popup-menu" class="popup-menu">
+        <i id="close-popup" class="fas fa-times"></i>
+        <h2>Fenêtre Pop-up</h2>
+
+        <div class="">
+          <span class="lives-icon">❤</span>
+          <span class="bonus-icon">★</span>
+        </div>
+
+        <div class="">
+          <span class="lives-icon">❤</span>
+          <span class="bonus-icon">★</span>
+        </div>
+
+      </div>
     </div>
 
 
@@ -96,7 +123,7 @@
   </div>
 
   <script src="./js/storage.js"></script>
-<script src="./js/loading.js"></script>
+  <script src="./js/loading.js"></script>
   <script src="./js/script.js"></script>
 
 </body>

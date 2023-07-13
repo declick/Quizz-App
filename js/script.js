@@ -10,7 +10,9 @@ window.addEventListener('load', () => {
   let attempts = 0; // Nombre de tentatives actuelles
   let maxAttempts = 3; // Nombre maximum de tentatives autorisées
   let isGameOver = false; // Indicateur de fin de partie
-
+  let menuIcon = document.getElementById('menu-icon');
+  let popupMenu = document.getElementById('popup-menu');
+  let closePopup = document.getElementById('close-popup');
   let score = getScore(); // Récupérer le score sauvegardé
   let scoreElement = document.getElementById('score');
   scoreElement.textContent = score.toString();
@@ -28,7 +30,14 @@ window.addEventListener('load', () => {
       menu.style.display = 'none';
       gameContainer.style.display = 'block';
     });
+    menuIcon.addEventListener('click', function() {
+      popupMenu.style.display = 'block';
+    });
+    closePopup.addEventListener('click', function() {
+      popupMenu.style.display = 'none';
+    });
   }
+
 
   const shuffleWord = (word) => {
     let shuffledWord = word.split('');
