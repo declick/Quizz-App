@@ -19,12 +19,13 @@ body {
 }
 
 .logo {
-  display: block;
-  width: 90%;
-  position: relative;
-  margin: auto;
-  height: auto;
-  top: 32px;
+display: block;
+    width: 90%;
+    position: relative;
+    margin: auto;
+    height: auto;
+    top: 15px;
+    z-index: -1;
 }
 
 .category {
@@ -33,10 +34,6 @@ body {
   border-radius: 10px;
   padding: 20px;
   margin: 10px;
-}
-
-#category1 {
-  margin-top: 74px;
 }
 
 .category-text {
