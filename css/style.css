@@ -19,10 +19,12 @@ body {
 }
 
 .logo {
-  max-width: 100%;
-  height: auto;
+  display: block;
+  width: 90%;
   position: relative;
-  top: 5px;
+  margin: auto;
+  height: auto;
+  top: 32px;
 }
 
 .category {
@@ -31,6 +33,10 @@ body {
   border-radius: 10px;
   padding: 20px;
   margin: 10px;
+}
+
+#category1 {
+  margin-top: 74px;
 }
 
 .category-text {
@@ -56,9 +62,13 @@ body {
   background-color: #777777;
 }
 
+
 #game-container {
-  background-image: url(../assets/img/brique.jpg);
-  background-position: center;
+
+  background: linear-gradient(to top right, rgba(156, 204, 101, 1) 0%, rgba(38, 198, 218, 1) 50%);
+  box-shadow: 1px 1px 30px rgba(38, 198, 218, 1);
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 5px;
   padding: 45px;
 }
 
@@ -159,9 +169,10 @@ body {
 }
 
 .progress-indicator {
-  left: -80px;
   position: relative;
-  top: -236px;
+  top: 223px;
+
+  text-shadow: 3px 6px 6px rgb(46 112 121);
 }
 
 
@@ -171,19 +182,26 @@ body {
 }
 
 .lives-indicator {
+  display: flex;
   position: absolute;
-  top: 38px
+  top: -76px;
+  left: 113px;
+  padding: 5px 13px;
+  border-radius: 10px;
+  background-color: rgb(38, 198, 218);
+  align-items: center;
 }
 
 .lives-menu {
   position: absolute;
   top: 86px;
+
 }
 
 .lives-indicator-game {
   position: relative;
-  top: -78px;
-  left: -148px;
+  bottom: 99px;
+  left: -148px
 }
 
 .lives-icon {
@@ -192,46 +210,43 @@ body {
 }
 
 .lives-count {
+  color: #3dff00;
   font-size: 18px;
   margin-left: 5px;
 }
 
 .lives-count-game {
+  color: #3dff00;
   font-size: 18px;
   margin-left: 5px;
 }
 
 .score-container {
   position: relative;
+  top: 13px;
 }
 
 #score-label {
   font-size: 28px;
   color: #d0f42a;
-  text-shadow:
-    0 0 6px rgba(202, 228, 225, 0.92),
-    0 0 30px rgba(202, 228, 225, 0.34),
-    0 0 12px rgba(30, 132, 242, 0.52),
-    0 0 21px rgba(30, 132, 242, 0.92),
-    0 0 34px rgba(30, 132, 242, 0.78),
-    0 0 54px rgba(30, 132, 242, 0.92);
+
 }
 
 #score {
   font-size: 24px;
   color: #d0f42a;
-  text-shadow:
-    0 0 6px rgba(202, 228, 225, 0.92),
-    0 0 30px rgba(202, 228, 225, 0.34),
-    0 0 12px rgba(30, 132, 242, 0.52),
-    0 0 21px rgba(30, 132, 242, 0.92),
-    0 0 34px rgba(30, 132, 242, 0.78),
-    0 0 54px rgba(30, 132, 242, 0.92);
 }
 
 .bonus-indicator {
   position: absolute;
-  top: 64px;
+  color: #3dff00;
+  top: -76px;
+  display: flex;
+  left: 187px;
+  padding: 5px 13px;
+  border-radius: 10px;
+  background-color: rgb(38, 198, 218);
+  align-items: center;
 }
 
 .bonus-icon {
@@ -240,30 +255,44 @@ body {
 }
 
 .bonus-indicator-game {
+  color: #3dff00;
   position: relative;
-  top: -106px;
-  right: -145px;
+  bottom: 73px;
+  right: 68px;
 }
 
 /*/ Menu Popup  /*/
 #menu-icon {
-  display: flex;
-  align-items: center;
-
-  font-size: 32px;
-  color: #ffffff;
+  padding: 8px 13px;
+  border-radius: 10px;
+  border: 0;
+  background-color: rgb(38, 198, 218);
+  letter-spacing: 1.5px;
+  font-size: 15px;
+  transition: all .3s ease;
+  box-shadow: rgb(49, 151, 171) 1px 10px 0px 0px;
+  color: hsl(0, 0%, 100%);
   cursor: pointer;
   position: absolute;
-  top: -80px;
+  bottom: 47px;
   z-index: 9999;
-  left: 5px;
-  gap: 5px;
+  left: 10px;
 }
 
-.menu-title {
-  font-size: 18px;
-  font-family: 'Press Start 2P', sans-serif;
+
+#menu-icon:hover {
+  box-shadow: rgb(49, 151, 171) 0px 7px 0px 0px;
 }
+
+#menu-icon:active {
+  background-color: rgb(38, 198, 218);
+  /*50, 168, 80*/
+  box-shadow: rgb(49, 151, 171) 0px 0px 0px 0px;
+  transform: translateY(5px);
+  transition: 200ms;
+}
+
+
 
 #popup-menu {
   display: none;
