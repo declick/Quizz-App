@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 body {
-  background-color: #000000;
+  background: black;
+
   margin: 0;
   padding: 0;
   display: flex;
@@ -19,13 +20,48 @@ body {
 }
 
 .logo {
-display: block;
-    width: 90%;
-    position: relative;
-    margin: auto;
-    height: auto;
-    top: 15px;
-    z-index: -1;
+  display: block;
+  width: 90%;
+  height: auto;
+  position: relative;
+  margin: auto;
+  z-index: -1;
+}
+
+img.logo {
+  width: 90%;
+  height: auto;
+}
+
+.menu {
+  display: flex;
+  width: 100%;
+  margin: auto;
+  height: auto;
+  gap: 15px;
+}
+
+.logo-menu {
+  position: relative;
+  width: 50%;
+  margin: auto;
+  height: auto;
+  background-color: #777777;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 3px 7px 0px 0px rgba(0, 0, 0, 0.5);
+}
+
+.logo-menu:hover {
+  background: linear-gradient(to top right, rgba(156, 204, 101, 1) 0%, rgba(38, 198, 218, 1) 50%);
+}
+
+.logo-menu:active {
+  -webkit-box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.5);
+  position: relative;
+  top: 7px;
 }
 
 .category {
@@ -41,11 +77,15 @@ display: block;
   margin-top: 10px;
 }
 
+#category1 {
+  margin-top: 0px;
+}
+
 .play-button {
   font-family: 'Press Start 2P', sans-serif;
   font-size: 16px;
   background: linear-gradient(to top right, rgba(156, 204, 101, 1) 0%, rgba(38, 198, 218, 1) 50%);
-  box-shadow: 1px 1px 30px rgba(38, 198, 218, 1);
+  box-shadow: rgb(43, 125, 135) 3px 7px 0px 0px;
   margin-top: 15px;
   border: none;
   color: #ffffff;
@@ -56,9 +96,16 @@ display: block;
 }
 
 .play-button:hover {
-  background-color: #777777;
+  background-color: rgb(43, 125, 135);
 }
 
+.play-button:active {
+  -webkit-box-shadow: 0px 2px 0px rgb(33, 86, 95);
+  -moz-box-shadow: 0px 2px 0px rgb(33, 86, 95);
+  box-shadow: 0px 2px 0px rgb(33, 86, 95);
+  position: relative;
+  top: 7px;
+}
 
 #game-container {
 
@@ -67,6 +114,7 @@ display: block;
   border: 2px solid rgb(255, 255, 255);
   border-radius: 5px;
   padding: 45px;
+  width: 100%;
 }
 
 .letter-container {
@@ -128,37 +176,78 @@ display: block;
 }
 
 #check-button {
-  font-family: 'Press Start 2P', sans-serif;
-  font-size: 16px;
+  position: relative;
+  width: 28px;
+  margin: auto;
+  height: auto;
   background: linear-gradient(to bottom right, rgba(63, 81, 181, 1) 0%, rgba(171, 71, 188, 1) 70%);
-  box-shadow: 1px 1px 30px rgba(81, 45, 168, 1);
-  margin-right: 10px;
-  border: none;
-  color: #ffffff;
-  padding: 10px 20px;
   border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin-bottom: 10px;
+  padding: 10px;
+  box-shadow: 3px 7px 0px rgba(81, 45, 168, 1);
 }
+
+#check-button:hover {
+  background: rgb(43, 125, 135);
+
+}
+
+#check-button:active {
+  -webkit-box-shadow: 0px 2px 0px rgb(33, 86, 95);
+  -moz-box-shadow: 0px 2px 0px rgb(33, 86, 95);
+  box-shadow: 0px 2px 0px rgb(33, 86, 95);
+  position: relative;
+  top: 7px;
+}
+
+#reset-button {
+  position: relative;
+  width: 28px;
+  margin: auto;
+  height: auto;
+  background: linear-gradient(to bottom right, rgba(63, 81, 181, 1) 0%, rgba(171, 71, 188, 1) 70%);
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 3px 7px 0px rgba(81, 45, 168, 1);
+}
+
+#reset-button:hover {
+  background: rgb(43, 125, 135);
+}
+
+#reset-button:active {
+  -webkit-box-shadow: 0px 2px 0px rgb(33, 86, 95);
+  -moz-box-shadow: 0px 2px 0px rgb(33, 86, 95);
+  box-shadow: 0px 2px 0px rgb(33, 86, 95);
+  position: relative;
+  top: 7px;
+}
+
 
 #back-button {
-  font-family: 'Press Start 2P', sans-serif;
-  font-size: 16px;
+  position: relative;
+  width: 28px;
+  margin: auto;
+  height: auto;
   background: linear-gradient(to bottom right, rgba(63, 81, 181, 1) 0%, rgba(171, 71, 188, 1) 70%);
-  box-shadow: 1px 1px 30px rgba(81, 45, 168, 1);
-  border: none;
-  color: #ffffff;
-  padding: 10px 20px;
   border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  padding: 10px;
+  box-shadow: 3px 7px 0px rgba(81, 45, 168, 1);
 }
 
-#check-button:hover,
+
 #back-button:hover {
-  background-color: #777777;
+  background: rgb(43, 125, 135);
 }
+
+
+#back-button:active {
+  -webkit-box-shadow: 0px 2px 0px rgb(33, 86, 95);
+  -moz-box-shadow: 0px 2px 0px rgb(33, 86, 95);
+  box-shadow: 0px 2px 0px rgb(33, 86, 95);
+  position: relative;
+  top: 7px;
+}
+
 
 
 .letter-container {
@@ -166,10 +255,13 @@ display: block;
 }
 
 .progress-indicator {
-  position: relative;
-  top: 223px;
-
   text-shadow: 3px 6px 6px rgb(46 112 121);
+
+}
+
+.progress-indicator-game {
+  position: absolute;
+  top: 15px;
 }
 
 
@@ -185,7 +277,7 @@ display: block;
   left: 113px;
   padding: 5px 13px;
   border-radius: 10px;
-  background-color: rgb(38, 198, 218);
+  background-color: rgb(43, 125, 135);
   align-items: center;
 }
 
@@ -195,10 +287,21 @@ display: block;
 
 }
 
-.lives-indicator-game {
+.lives-menu2 {
+  top: -109px;
   position: relative;
-  bottom: 99px;
-  left: -148px
+
+}
+
+
+.lives-indicator-game {
+  display: flex;
+  position: absolute;
+  padding: 5px 13px;
+  border-radius: 10px;
+  background-color: rgb(43, 125, 135);
+  align-items: center;
+  left: -40px;
 }
 
 .lives-icon {
@@ -207,15 +310,17 @@ display: block;
 }
 
 .lives-count {
-  color: #3dff00;
   font-size: 18px;
   margin-left: 5px;
 }
 
 .lives-count-game {
-  color: #3dff00;
   font-size: 18px;
   margin-left: 5px;
+}
+
+#score-container {
+  display: none;
 }
 
 .score-container {
@@ -236,13 +341,12 @@ display: block;
 
 .bonus-indicator {
   position: absolute;
-  color: #3dff00;
   top: -76px;
   display: flex;
   left: 187px;
   padding: 5px 13px;
   border-radius: 10px;
-  background-color: rgb(38, 198, 218);
+  background-color: rgb(43, 125, 135);
   align-items: center;
 }
 
@@ -252,22 +356,27 @@ display: block;
 }
 
 .bonus-indicator-game {
-  color: #3dff00;
-  position: relative;
-  bottom: 73px;
-  right: 68px;
+  display: flex;
+  position: absolute;
+  padding: 5px 13px;
+  border-radius: 10px;
+  background-color: rgb(43, 125, 135);
+  align-items: center;
+  left: 34px;
 }
 
 /*/ Menu Popup  /*/
+
+
 #menu-icon {
   padding: 8px 13px;
   border-radius: 10px;
   border: 0;
-  background-color: rgb(38, 198, 218);
+  background-color: rgb(43, 125, 135);
   letter-spacing: 1.5px;
   font-size: 15px;
   transition: all .3s ease;
-  box-shadow: rgb(49, 151, 171) 1px 10px 0px 0px;
+  box-shadow: rgb(33, 86, 95) 3px 7px 0px 0px;
   color: hsl(0, 0%, 100%);
   cursor: pointer;
   position: absolute;
@@ -278,19 +387,17 @@ display: block;
 
 
 #menu-icon:hover {
-  box-shadow: rgb(49, 151, 171) 0px 7px 0px 0px;
+  box-shadow: rgb(33, 86, 95) 0px 7px 0px 0px;
 }
 
 #menu-icon:active {
-  background-color: rgb(38, 198, 218);
-  /*50, 168, 80*/
+  background-color: rgb(43, 125, 135);
   box-shadow: rgb(49, 151, 171) 0px 0px 0px 0px;
   transform: translateY(5px);
   transition: 200ms;
 }
 
-
-
+/* Ajouter des styles pour les boutons dans le popup */
 #popup-menu {
   display: none;
   position: fixed;
@@ -314,12 +421,16 @@ display: block;
 }
 
 #close-popup {
-  font-size: 16px;
-  color: #ff0000;
   position: absolute;
-  top: 5px;
-  right: 5px;
+  bottom: 115px;
+  left: 285px;
   cursor: pointer;
-  border: 3px solid white;
-  padding: 3px;
 }
+
+
+#close-popup:active {
+  transform: translateY(5px);
+  transition: 200ms;
+}
+
+/* --------------- */

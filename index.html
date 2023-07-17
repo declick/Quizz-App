@@ -4,11 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="quizz retro">
 
-  <title>Votre jeu rétro</title>
+  <title>quizz retro</title>
   <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.all.min.js"></script>
+
+
+  <link rel="icon" href="favicon.ico" />
 </head>
 
 <body>
@@ -16,86 +22,105 @@
 
     <div class="logo">
       <img class="logo" src="./assets/img/menu.jpg" alt="logo">
-      <div class="title">
-      </div>
-      <audio src="./assets/sound/ready.mp3" type="audio/mp3" autoplay></audio>
+
+
     </div>
   </div>
 
   <div id="menu" class="container" style="display: none;">
+    <img class="logo" src="./assets/img/menu.jpg" alt="logo">
 
-    <div class="logo">
-      <img class="logo" src="./assets/img/menu.jpg" alt="logo">
-    </div>
-    <div id="" class="lives-menu">
-      <div id="" class="lives-indicator">
+    <div class="lives-menu">
+      <div class="lives-indicator">
         <span class="lives-icon">❤</span>
         <span id="lives-count" class="lives-count">3</span>
       </div>
 
-      <div id="" class="bonus-indicator">
+
+
+      <div class="bonus-indicator">
         <span class="bonus-icon">★</span>
         <span id="bonus-count" class="bonus-count">10</span>
       </div>
 
-
-      <a id="menu-icon" title="">MENU</a>
+      <a role="link" id="menu-icon" title="menu">MENU</a>
 
       <div id="popup-menu" class="popup-menu">
-        <i id="close-popup" class="fas fa-times"></i>
+
+        <img id="close-popup" src="./assets/img/close.png" alt="logo">
         <h2>Are You Ready ?</h2>
 
+        <div class="menu">
+          <img class="logo-menu" src="./assets/img/SpeakerOn.png" alt="logo">
+          <img class="logo-menu" src="./assets/img/SpeakerMute.png" alt="logo">
+          <img class="logo-menu" src="./assets/img/Trophy.png" alt="logo">
+          <img class="logo-menu" src="./assets/img/ShoppingCart.png" alt="logo">
+        </div>
+
         <div id="score-container" class="score-container">
-          <span id="score-label">score:</span>
+          <span id="score-label">Score:</span>
           <span id="score">0</span>
         </div>
 
       </div>
     </div>
 
-
     <div class="category" id="category1">
       <div class="category-text">Niveau 1 - Mots de 3 lettres</div>
       <div class="category-indicator" data-category="Niveau 1 - Mots de 3 lettres">
+        <span class="progress-indicator"></span>
       </div>
       <button class="play-button">Jouer</button>
     </div>
 
     <div class="category" id="category2">
       <div class="category-text">Niveau 2 - Mots de 4 lettres</div>
-      <div class="category-indicator" data-category="Niveau 2 - Mots de 4 lettres"></div>
+      <div class="category-indicator" data-category="Niveau 2 - Mots de 4 lettres">
+        <span class="progress-indicator"></span>
+      </div>
       <button class="play-button">Jouer</button>
     </div>
+
     <div class="category" id="category3">
       <div class="category-text">Niveau 3 - Mots de 5 lettres</div>
-      <div class="category-indicator" data-category="Niveau 3 - Mots de 5 lettres"></div>
+      <div class="category-indicator" data-category="Niveau 3 - Mots de 5 lettres">
+        <span class="progress-indicator"></span>
+      </div>
       <button class="play-button">Jouer</button>
     </div>
+
     <div class="category" id="category4">
       <div class="category-text">Niveau 4 - Mots de 6 lettres</div>
-      <div class="category-indicator" data-category="Niveau 4 - Mots de 6 lettres"></div>
+      <div class="category-indicator" data-category="Niveau 4 - Mots de 6 lettres">
+        <span class="progress-indicator"></span>
+      </div>
       <button class="play-button">Jouer</button>
     </div>
+
     <div class="category" id="category5">
       <div class="category-text">Niveau 5 - Mots de 7 lettres</div>
-      <div class="category-indicator" data-category="Niveau 5 - Mots de 7 lettres"></div>
+      <div class="category-indicator" data-category="Niveau 5 - Mots de 7 lettres">
+        <span class="progress-indicator"></span>
+      </div>
       <button class="play-button">Jouer</button>
     </div>
   </div>
 
+
   <div id="game-container" style="display: none;">
 
+    <div class="lives-menu2">
+      <div class="bonus-indicator-game">
+        <span class="bonus-icon">★</span>
+        <span id="bonus-count-game" class="bonus-count-game">10</span>
+      </div>
 
-    <div id="" class="bonus-indicator-game">
-      <span class="bonus-icon">★</span>
-      <span id="bonus-count-game" class="bonus-count-game">10</span>
+      <div class="lives-indicator-game">
+        <span class="lives-icon">❤</span>
+        <span id="lives-count-game" class="lives-count-game">3</span>
+
+      </div>
     </div>
-
-    <div id="" class="lives-indicator-game">
-      <span class="lives-icon">❤</span>
-      <span id="lives-count-game" class="lives-count-game">3</span>
-    </div>
-
 
     <div class="word-container">
       <div id="empty-box-container"></div>
@@ -103,10 +128,15 @@
     <div class="letter-container">
       <div id="letter-box-container"></div>
     </div>
-    <button id="check-button">Vérifier</button>
-    <button id="back-button">Retour au menu</button>
+
+    <img class="menu-game" id="back-button" src="./assets/img/maison.png" alt="logo">
+
+    <img class="menu-game" id="check-button" src="./assets/img/verifier.png" alt="logo">
+
+    <img class="menu-game" id="reset-button" src="./assets/img/rafraichir.png" alt="logo">
   </div>
 
+  <script src="./js/sound.js"></script>
   <script src="./js/storage.js"></script>
   <script src="./js/loading.js"></script>
   <script src="./js/script.js"></script>
