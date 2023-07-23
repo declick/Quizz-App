@@ -32,3 +32,7 @@ const getScore = () => {
   let storedScore = localStorage.getItem('score');
   return storedScore ? parseInt(storedScore) : 0;
 };
+function saveBonusCount(bonusCount) {
+  localStorage.setItem('bonusCount', bonusCount);
+}
+

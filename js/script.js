@@ -18,6 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
   let scoreElement = document.getElementById('score');
   scoreElement.textContent = score.toString();
 
+  
 
   let lives = restoreLives(); // Restaurer le nombre de vies sauvegardé
 
@@ -49,6 +50,159 @@ window.addEventListener('DOMContentLoaded', () => {
       scoreContainer.style.display = 'none';
     }
   });
+
+  let baguetteImage = document.querySelector('#baguette');
+  baguetteImage.addEventListener('click', useMagicWand);
+  
+  function useMagicWand() {
+    // Vérifiez si vous avez des étoiles bonus disponibles
+    let bonusCount = parseInt(document.getElementById('bonus-count-game').textContent);
+    bonusCount = parseInt(document.getElementById('bonus-count').textContent);
+    if (bonusCount > 0) {
+      // Utilisez la baguette magique pour placer une lettre correcte
+      if (!useMagicWandToPlaceLetter()) {
+        // Affichez un message si aucune lettre valide n'a été placée
+        Swal.fire({
+          title: 'Oops !',
+          text: 'Il n\'y a pas de lettre valide à placer.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+      } else {
+        // Décrémentez le nombre d'étoiles bonus uniquement si une lettre valide a été placée
+        bonusCount--;
+        // Mettez à jour l'affichage du nombre d'étoiles bonus
+        document.getElementById('bonus-count-game').textContent = bonusCount.toString();
+        document.getElementById('bonus-count').textContent = bonusCount.toString();
+        // Sauvegardez le nombre d'étoiles bonus restantes
+        saveBonusCount(bonusCount);
+      }} else {
+        // Affichez un message si vous n'avez pas suffisamment d'étoiles bonus disponibles
+        Swal.fire({
+          title: 'Oops !',
+          text: 'Vous n\'avez pas assez d\'étoiles bonus disponibles. Vous avez besoin de 5 étoiles bonus pour cette action.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        })
+    
+    }
+  }
+  
+  function restoreBonusCount() {
+    let bonusCount = localStorage.getItem('bonusCount');
+    if (bonusCount === null) {
+      bonusCount = 10; // Nombre d'étoiles bonus initial si aucune valeur n'est sauvegardée
+    } else {
+      bonusCount = parseInt(bonusCount);
+    }
+    return bonusCount;
+  }
+  
+  let bonusCount = restoreBonusCount();
+document.getElementById('bonus-count-game').textContent = bonusCount.toString();
+document.getElementById('bonus-count').textContent = bonusCount.toString();
+  
+function useMagicWandToPlaceLetter() {
+  let emptyBoxes = document.getElementsByClassName('empty-box');
+  let availableLetters = getAvailableLetters();
+  let letterPlaced = false; // Variable pour vérifier si une lettre valide a été placée
+
+  // Obtenez le mot cible actuellement affiché
+  let targetWord = selectedWord;
+
+  // Parcourez les cases vides
+  for (let i = 0; i < emptyBoxes.length; i++) {
+    let emptyBox = emptyBoxes[i];
+
+    // Vérifiez si cette case vide a déjà une lettre correcte placée
+    if (!emptyBox.classList.contains('filled')) {
+      // Obtenez l'index de la lettre actuellement manquante dans le mot cible
+      let missingLetterIndex = getMissingLetterIndex(targetWord);
+
+      // Vérifiez si l'index est valide
+      if (missingLetterIndex >= 0 && missingLetterIndex < targetWord.length) {
+        // Obtenez la lettre manquante du mot cible
+        let missingLetter = targetWord[missingLetterIndex];
+
+        // Vérifiez si cette lettre est disponible dans la liste des lettres disponibles
+        if (availableLetters.includes(missingLetter)) {
+          // Placez la lettre dans la case vide
+          emptyBox.textContent = missingLetter;
+          emptyBox.classList.add('filled');
+
+          // Supprimez la lettre de la liste des lettres disponibles pour éviter la répétition
+          availableLetters = availableLetters.filter(letter => letter !== missingLetter);
+
+          // Si la lettre placée est dans la liste des lettres disponibles en bas, supprimez-la également
+          let letterBoxes = document.getElementsByClassName('letter');
+          for (let j = 0; j < letterBoxes.length; j++) {
+            let letterBox = letterBoxes[j];
+            if (letterBox.textContent === missingLetter) {
+              letterBox.style.visibility = 'hidden';
+              break;
+            }
+          }
+
+          letterPlaced = true; // Définir la variable sur true si une lettre a été placée
+          break; // Sortez de la boucle car nous avons trouvé et placé une lettre valide
+        }
+      }
+    }
+  }
+
+  return letterPlaced; // Renvoyer true si une lettre valide a été placée, sinon false
+}
+  
+  
+  function getMissingLetterIndex(word) {
+    // Obtenez les cases vides
+    let emptyBoxes = document.getElementsByClassName('empty-box');
+    
+    // Parcourez les cases vides
+    for (let i = 0; i < emptyBoxes.length; i++) {
+      let emptyBox = emptyBoxes[i];
+      
+      // Vérifiez si cette case vide a déjà une lettre correcte placée
+      if (!emptyBox.classList.contains('filled')) {
+        // Obtenez l'index de cette case vide dans le mot cible
+        let boxIndex = Array.from(emptyBoxes).indexOf(emptyBox);
+        
+        // Vérifiez si l'index est valide
+        if (boxIndex >= 0 && boxIndex < word.length) {
+          // Renvoie l'index de la lettre manquante
+          return boxIndex;
+        }
+      }
+    }
+    
+    // Si aucune case vide n'a été trouvée, renvoie -1
+    return -1;
+  }
+  
+  function getAvailableLetters() {
+    // Obtenez toutes les lettres disponibles dans la lettre-container
+    let letterBoxes = document.getElementsByClassName('letter');
+    let availableLetters = [];
+    for (let i = 0; i < letterBoxes.length; i++) {
+      let letterBox = letterBoxes[i];
+      availableLetters.push(letterBox.textContent);
+    }
+    return availableLetters;
+  }
+  
+  function getValidLetterForEmptyBox(existingLetter, availableLetters, filledLetters) {
+    // Obtenez une lettre valide qui n'est pas déjà présente dans la case vide et les lettres déjà placées
+    let validLetter = null;
+    for (let i = 0; i < availableLetters.length; i++) {
+      let letter = availableLetters[i];
+      if (letter !== existingLetter && !filledLetters.includes(letter)) {
+        validLetter = letter;
+        break;
+      }
+    }
+    return validLetter;
+  }
+  
 
   const shuffleWord = (word) => {
     let shuffledWord = word.split('');
