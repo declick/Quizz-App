@@ -1,10 +1,10 @@
-# Quizz APP
+# Quizz
 
-![image](https://github.com/declick/Quizz-App/assets/36468501/a165b0a6-f928-484b-93f9-21fc6bbdb443)
+![image](https://github.com/declick/Quizz-App/assets/36468501/353407a1-7552-4c16-8ee2-68d998d494f8)
 
+![image](https://github.com/declick/Quizz-App/assets/36468501/247bf332-7b2c-4bf5-999a-245520ae2945)
 
-![image](https://github.com/declick/Quizz-App/assets/36468501/7f9639b7-9227-4a1c-9160-802349834fac)
-
+![image](https://github.com/declick/Quizz-App/assets/36468501/e80eb4c0-17e3-4fdc-acc8-15e29d7dfa39)
 
 
 
