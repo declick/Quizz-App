@@ -1,3 +1,4 @@
+
 const saveProgress = (categoryName, progress) => {
   localStorage.setItem(categoryName, progress);
 };
@@ -21,7 +22,7 @@ const restoreLives = () => {
     return parseInt(storedLives);
   }
 
-  return 3;
+  return 5;
 };
 
 const saveScore = (score) => {

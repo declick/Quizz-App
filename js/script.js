@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', () => {
   let selectedWord = '';
   let categoryName = '';
   let attempts = 0; // Nombre de tentatives actuelles
-  let maxAttempts = 3; // Nombre maximum de tentatives autorisées
+  let maxAttempts = 5; // Nombre maximum de tentatives autorisées
   let isGameOver = false; // Indicateur de fin de partie
   let menuIcon = document.getElementById('menu-icon');
   let popupMenu = document.getElementById('popup-menu');
@@ -90,7 +90,6 @@ function useGiven() {
     });
   }
 }
-
 function useGivenToPlaceLetters() {
   // Obtenez le mot cible actuellement affiché
   let targetWord = selectedWord;
@@ -98,33 +97,15 @@ function useGivenToPlaceLetters() {
   // Obtenez les cases vides
   let emptyBoxes = document.getElementsByClassName('empty-box');
 
-  // Obtenez toutes les lettres disponibles dans la lettre-container
-  let availableLetters = getAvailableLetters();
-
   // Assurez-vous que le nombre de cases vides correspond au nombre de lettres dans le mot cible
   if (emptyBoxes.length === targetWord.length) {
     // Parcourez les cases vides
     for (let i = 0; i < emptyBoxes.length; i++) {
       let emptyBox = emptyBoxes[i];
 
-      // Obtenez l'index de la lettre actuellement manquante dans le mot cible
-      let missingLetterIndex = getMissingLetterIndex(targetWord);
-
-      // Vérifiez si l'index est valide
-      if (missingLetterIndex >= 0 && missingLetterIndex < targetWord.length) {
-        // Obtenez la lettre manquante du mot cible
-        let missingLetter = targetWord[missingLetterIndex];
-
-        // Vérifiez si cette lettre est disponible dans la liste des lettres disponibles
-        if (availableLetters.includes(missingLetter)) {
-          // Placez la lettre dans la case vide
-          emptyBox.textContent = missingLetter;
-          emptyBox.classList.add('filled');
-
-          // Supprimez la lettre de la liste des lettres disponibles pour éviter la répétition
-          availableLetters = availableLetters.filter(letter => letter !== missingLetter);
-        }
-      }
+      // Placez la lettre du mot cible dans la case vide
+      emptyBox.textContent = targetWord[i];
+      emptyBox.classList.add('filled');
     }
 
     return true; // Renvoyer true si toutes les lettres ont été placées avec succès
@@ -132,7 +113,6 @@ function useGivenToPlaceLetters() {
     return false; // Renvoyer false si le nombre de cases vides ne correspond pas au nombre de lettres dans le mot cible
   }
 }
-
 
 
 

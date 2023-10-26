@@ -6,7 +6,6 @@ window.addEventListener('load', () => {
 
   menu.style.display = 'none';
 
-  readyAudio.play();
 
   // Ajouter un gestionnaire d'événements au bouton "Play"
   playButton.addEventListener('click', () => {
