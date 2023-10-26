@@ -31,6 +31,7 @@ body {
 img.logo {
   width: 90%;
   height: auto;
+  top:10px;
 }
 
 .menu {
@@ -80,6 +81,20 @@ img.logo {
 #category1 {
   margin-top: 0px;
 }
+#play-button {
+  font-family: 'Press Start 2P', sans-serif;
+  font-size: 16px;
+  background: linear-gradient(to top right, rgba(156, 204, 101, 1) 0%, rgba(38, 198, 218, 1) 50%);
+  box-shadow: rgb(43, 125, 135) 3px 7px 0px 0px;
+  margin-top: 15px;
+  border: none;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
 
 .play-button {
   font-family: 'Press Start 2P', sans-serif;

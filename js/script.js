@@ -51,6 +51,92 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+ // Fonction bouton given
+let givenImage = document.querySelector('#given');
+givenImage.addEventListener('click', useGiven);
+
+function useGiven() {
+  // Vérifiez si vous avez des étoiles bonus disponibles
+  let bonusCount = parseInt(document.getElementById('bonus-count-game').textContent);
+
+  if (bonusCount >= 5) {
+    // Utilisez l'image "given" pour placer toutes les lettres dans le bon ordre
+    if (!useGivenToPlaceLetters()) {
+      // Affichez un message si aucune lettre valide n'a été placée
+      Swal.fire({
+        title: 'Oops !',
+        text: 'Il n\'y a pas de lettre valide à placer.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    } else {
+      // Décrémentez le nombre d'étoiles bonus de 5
+      bonusCount -= 5;
+      
+      // Mettez à jour l'affichage du nombre d'étoiles bonus
+      document.getElementById('bonus-count-game').textContent = bonusCount.toString();
+      document.getElementById('bonus-count').textContent = bonusCount.toString();
+      
+      // Sauvegardez le nombre d'étoiles bonus restantes
+      saveBonusCount(bonusCount);
+    }
+  } else {
+    // Affichez un message si vous n'avez pas suffisamment d'étoiles bonus disponibles
+    Swal.fire({
+      title: 'Oops !',
+      text: 'Vous n\'avez pas assez d\'étoiles bonus disponibles. Vous avez besoin de 5 étoiles bonus pour cette action.',
+      icon: 'error',
+      confirmButtonText: 'OK'
+    });
+  }
+}
+
+function useGivenToPlaceLetters() {
+  // Obtenez le mot cible actuellement affiché
+  let targetWord = selectedWord;
+
+  // Obtenez les cases vides
+  let emptyBoxes = document.getElementsByClassName('empty-box');
+
+  // Obtenez toutes les lettres disponibles dans la lettre-container
+  let availableLetters = getAvailableLetters();
+
+  // Assurez-vous que le nombre de cases vides correspond au nombre de lettres dans le mot cible
+  if (emptyBoxes.length === targetWord.length) {
+    // Parcourez les cases vides
+    for (let i = 0; i < emptyBoxes.length; i++) {
+      let emptyBox = emptyBoxes[i];
+
+      // Obtenez l'index de la lettre actuellement manquante dans le mot cible
+      let missingLetterIndex = getMissingLetterIndex(targetWord);
+
+      // Vérifiez si l'index est valide
+      if (missingLetterIndex >= 0 && missingLetterIndex < targetWord.length) {
+        // Obtenez la lettre manquante du mot cible
+        let missingLetter = targetWord[missingLetterIndex];
+
+        // Vérifiez si cette lettre est disponible dans la liste des lettres disponibles
+        if (availableLetters.includes(missingLetter)) {
+          // Placez la lettre dans la case vide
+          emptyBox.textContent = missingLetter;
+          emptyBox.classList.add('filled');
+
+          // Supprimez la lettre de la liste des lettres disponibles pour éviter la répétition
+          availableLetters = availableLetters.filter(letter => letter !== missingLetter);
+        }
+      }
+    }
+
+    return true; // Renvoyer true si toutes les lettres ont été placées avec succès
+  } else {
+    return false; // Renvoyer false si le nombre de cases vides ne correspond pas au nombre de lettres dans le mot cible
+  }
+}
+
+
+
+
+  // Fonction bouton baguette magique
   let baguetteImage = document.querySelector('#baguette');
   baguetteImage.addEventListener('click', useMagicWand);
   
@@ -80,13 +166,14 @@ window.addEventListener('DOMContentLoaded', () => {
         // Affichez un message si vous n'avez pas suffisamment d'étoiles bonus disponibles
         Swal.fire({
           title: 'Oops !',
-          text: 'Vous n\'avez pas assez d\'étoiles bonus disponibles. Vous avez besoin de 5 étoiles bonus pour cette action.',
+          text: 'Vous n\'avez pas assez d\'étoiles bonus disponibles. Vous avez besoin de 1 étoiles bonus pour cette action.',
           icon: 'error',
           confirmButtonText: 'OK'
         })
     
     }
   }
+
   
   function restoreBonusCount() {
     let bonusCount = localStorage.getItem('bonusCount');

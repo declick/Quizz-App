@@ -36,3 +36,4 @@ function saveBonusCount(bonusCount) {
   localStorage.setItem('bonusCount', bonusCount);
 }
 
+
